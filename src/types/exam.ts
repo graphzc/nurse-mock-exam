@@ -2,6 +2,7 @@ export interface ExamQuestion {
   question: string;
   options: Record<string, string>;
   answer: number;
+  explanation?: string;
 }
 
 export interface ExamTemplate {

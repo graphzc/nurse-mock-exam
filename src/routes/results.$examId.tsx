@@ -274,6 +274,16 @@ function ResultsPage() {
                       )
                     })}
                   </div>
+                  {/* Explanation */}
+                  {q.explanation && (
+                    <div
+                      className="border-t px-4 py-3 text-sm leading-relaxed"
+                      style={{ borderColor: 'var(--line)', color: 'var(--sea-ink-soft)', background: 'var(--sand)' }}
+                    >
+                      <span className="font-semibold" style={{ color: 'var(--sea-ink)' }}>อธิบายเฉลย: </span>
+                      {q.explanation}
+                    </div>
+                  )}
                 </div>
               )
             })}
