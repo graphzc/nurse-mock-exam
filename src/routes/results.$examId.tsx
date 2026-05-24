@@ -1,6 +1,8 @@
 import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
 import { CheckCircle2, XCircle, Trophy, RotateCcw, Home, ChevronDown, ChevronUp } from 'lucide-react'
 import { useState } from 'react'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import { getLatestResult } from '#/lib/exam-storage'
 import { clearSession } from '#/lib/exam-storage'
 import { getExam } from '#/lib/exam-data'
@@ -190,12 +192,11 @@ function ResultsPage() {
                       >
                         ข้อ {i + 1} — {isCorrect ? 'ถูก' : 'ผิด'}
                       </span>
-                      <p
-                        className="mt-0.5 text-sm leading-relaxed"
-                        style={{ color: 'var(--sea-ink)' }}
-                      >
-                        {q.question}
-                      </p>
+                      <div className="prose prose-sm max-w-none mt-0.5" style={{ color: 'var(--sea-ink)' }}>
+                        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                          {q.question}
+                        </ReactMarkdown>
+                      </div>
                     </div>
                   </div>
 
@@ -277,11 +278,17 @@ function ResultsPage() {
                   {/* Explanation */}
                   {q.explanation && (
                     <div
-                      className="border-t px-4 py-3 text-sm leading-relaxed"
-                      style={{ borderColor: 'var(--line)', color: 'var(--sea-ink-soft)', background: 'var(--sand)' }}
+                      className="border-t px-4 py-3"
+                      style={{ borderColor: 'var(--line)', background: 'var(--sand)' }}
                     >
-                      <span className="font-semibold" style={{ color: 'var(--sea-ink)' }}>อธิบายเฉลย: </span>
-                      {q.explanation}
+                      <p className="mb-1.5 text-xs font-semibold" style={{ color: 'var(--sea-ink)' }}>
+                        อธิบายเฉลย
+                      </p>
+                      <div className="prose prose-sm max-w-none" style={{ color: 'var(--sea-ink-soft)' }}>
+                        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                          {q.explanation}
+                        </ReactMarkdown>
+                      </div>
                     </div>
                   )}
                 </div>

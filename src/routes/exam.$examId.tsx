@@ -2,6 +2,8 @@ import { createFileRoute, useNavigate, Link } from '@tanstack/react-router'
 import { useForm } from '@tanstack/react-form'
 import { useState, useEffect } from 'react'
 import { ChevronLeft, ChevronRight, Send, BookOpen } from 'lucide-react'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import { getExam } from '#/lib/exam-data'
 import { getSession, saveSession, clearSession, saveResult } from '#/lib/exam-storage'
 import type { ExamResult } from '#/types/exam'
@@ -206,9 +208,11 @@ function ExamPage() {
               </span>
               <BookOpen className="h-3.5 w-3.5" style={{ color: 'var(--sea-ink-soft)' }} />
             </div>
-            <p className="font-medium leading-relaxed" style={{ color: 'var(--sea-ink)' }}>
-              {question.question}
-            </p>
+            <div className="prose prose-sm max-w-none font-medium leading-relaxed" style={{ color: 'var(--sea-ink)' }}>
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                {question.question}
+              </ReactMarkdown>
+            </div>
           </div>
 
           {/* Options */}
